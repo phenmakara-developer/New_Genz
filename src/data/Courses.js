@@ -112,7 +112,7 @@ const courses = [
     badge: "Clean Fit",
     description:
       "Minimal all-white sneakers with a cushioned sole and premium leather. Clean lines that match absolutely everything.",
-    sizes: ["7", "8", "9", "10", "11", "12"],
+    sizes: ["38", "39", "40", "41", "42"],
     colors: ["#ffffff", "#f3f4f6"],
     specs: [
       { label: "Upper", value: "Premium Leather" },
