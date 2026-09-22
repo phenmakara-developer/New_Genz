@@ -1,9 +1,10 @@
 import './index.css'
 import { useEffect } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 
 import { CartProvider } from './context/CartContext'
 import { OrderProvider } from './context/OrderContext'
+import { AuthProvider } from './context/AuthContext'
 
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -17,9 +18,21 @@ import Buy from './page/Buy'
 import Checkout from './page/Checkout'
 import Success from './page/Success'
 import Cart from './page/Cart'
+import Login from './page/Login'
+import Register from './page/Register'
 
 import AOS from 'aos'
 import 'aos/dist/aos.css'
+
+function ScrollToTop() {
+  const { pathname } = useLocation()
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, left: 0, behavior: 'instant' })
+  }, [pathname])
+
+  return null
+}
 
 function App() {
   useEffect(() => {
@@ -31,10 +44,12 @@ function App() {
 
   return (
     <BrowserRouter>
-      <CartProvider>
-        <OrderProvider>
-          <Navbar />
-          <Routes>
+      <ScrollToTop />
+      <AuthProvider>
+        <CartProvider>
+          <OrderProvider>
+            <Navbar />
+            <Routes>
             <Route path="/" element={<HomePage />} />
             <Route path="/course" element={<CoursePage />} />
             <Route path="/product/:id" element={<ProductDetail />} />
@@ -46,10 +61,13 @@ function App() {
             <Route path="/checkout" element={<Checkout />} />
             <Route path="/success" element={<Success />} />
             <Route path="/success/:orderId" element={<Success />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/register" element={<Register />} />
           </Routes>
           <Footer />
-        </OrderProvider>
-      </CartProvider>
+          </OrderProvider>
+        </CartProvider>
+      </AuthProvider>
     </BrowserRouter>
   )
 }
